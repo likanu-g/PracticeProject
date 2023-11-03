@@ -1,5 +1,7 @@
 package org.example.algorithm.linkedlist;
 
+import java.util.StringJoiner;
+
 public class MyLinkedList {
     static class Node {
         int data;
@@ -23,7 +25,7 @@ public class MyLinkedList {
      * @return
      */
     boolean insertNode(int data, int index) {
-        if (index < 0 || index > length + 1) {
+        if (index < 1 || index > length + 1) {
             throw new UnsupportedOperationException();
         }
         //在索引是1的位置添加一个
@@ -69,12 +71,65 @@ public class MyLinkedList {
      * @param index
      * @return
      */
-    boolean deleteNode(int index) {
-        if (index <= 0) {
+    public boolean deleteNode(int index) {
+        if (index < 1 || length < 1 || index > length) {
             throw new UnsupportedOperationException();
         }
-        return false;
+
+        //删除第一个节点
+        if (index == 1) {
+            //直接将head.next指向head即可
+            head = head.next;
+        } else {
+            //注意这里是从1开始的，比从0开始少循环次
+            int i = 1;
+            Node tmp = head;
+            //遍历查找要删除的索引的节点的上一个节点
+            while (i < index) {
+                //找到是tmp的上一个
+                tmp = tmp.next;
+                i++;
+            }
+            //原先要删除的index对应的节点的上一个节点是tmp,
+            //这里要删除tmp.next,于是先找到tmp.next.next，
+            // 因为如果不先找到它，直接把tmp.next设置为null后，index后面所有的节点就都是null
+            Node tmpNext = tmp.next.next;
+            //删除tmp.next
+            //tmp.next = null;
+            //将tmp.next指向上面找到的tmp.next.next
+            tmp.next = tmpNext;
+            //这里可以简写成
+            //tmp.next = tmp.next.next
+
+        }
+        length--;
+        return true;
+    }
+
+    public int getNode(int index) {
+        if (index > length && index < 1) {
+            return -1;
+        }
+        Node node = head;
+        for (int i = 1; i < index; i++) {
+            node = node.next;
+        }
+        return node.data;
     }
 
 
+    public void print() {
+        StringBuilder stringBuilder = new StringBuilder();
+        StringJoiner stringJoiner = new StringJoiner("->");
+        if (head == null) {
+            System.out.println(stringBuilder.append("[]"));
+        } else {
+            Node node = head;
+            while (node != null) {
+                stringJoiner.add(node.data + "");
+                node = node.next;
+            }
+            System.out.println(stringBuilder.append("[").append(stringJoiner).append("]"));
+        }
+    }
 }
