@@ -14,8 +14,14 @@ public class MyLinkedList {
 
 
     Node head = null; //链表头,链表的第一个节点
-    int length; //链表的长度
+    int length = 0; //链表的长度
 
+    public MyLinkedList() {
+    }
+
+    public MyLinkedList(Node head) {
+        this.head = head;
+    }
 
     /**
      * 插入节点(新增一个节点)
@@ -131,5 +137,44 @@ public class MyLinkedList {
             }
             System.out.println(stringBuilder.append("[").append(stringJoiner).append("]"));
         }
+    }
+
+
+    /**
+     * 合并两个链表
+     * @param myLinkedList1
+     * @param myLinkedList2
+     * @return
+     */
+    public static MyLinkedList mergeLinkedList(MyLinkedList myLinkedList1, MyLinkedList myLinkedList2) {
+        //创建虚拟节点，一种链表操作技巧
+        Node dummy = new Node(-1);
+        //创建一个虚拟节点的引用，为了方便后续对current的赋值而不改变dummy
+        Node current = dummy;
+        Node node1 = myLinkedList1.head;
+        Node node2 = myLinkedList2.head;
+
+        while (node1 != null && node2 != null) {
+            //比较node1和node2的最小值
+            if(node1.data < node2.data) {
+                //将最小的那一个作为第一个节点赋值给current
+                current.next = node1;
+                //移动链表到下一个节点
+                node1 = node1.next;
+            }else {
+                current.next = node2;
+                node2 = node2.next;
+            }
+            //移动到current的下一个节点，继续处理相同的逻辑
+            current = current.next;
+        }
+        //对于两个链表的剩余部分，如果node1比node2长，则循环完毕后，node1不为空，反之node2不为空
+        if(node1 != null) {
+            current.next = node1;
+        }else {
+            current.next = node2;
+        }
+        //由于简化了代码，这里没有使用链表的length
+        return new MyLinkedList(dummy.next);
     }
 }
