@@ -1,6 +1,7 @@
 package org.example.algorithm.stack;
 
 import java.util.Arrays;
+import java.util.Stack;
 
 public class MyStack {
     int[] data; //数组实现栈
@@ -37,9 +38,13 @@ public class MyStack {
      * @return
      */
     public int pop() {
-        int tmp = data[--top];
-        data[top] = 0;
-        return tmp;
+        if (isEmpty()) {
+            return -1;
+        } else {
+            int tmp = data[--top];
+            data[top] = 0;
+            return tmp;
+        }
     }
 
     /**
@@ -51,5 +56,34 @@ public class MyStack {
         return data[top - 1];
     }
 
+    public boolean isEmpty() {
+        return top == 0;
+    }
 
+    /**
+     * 匹配括号
+     *
+     * @param expressing
+     * @return
+     */
+    public boolean matchBracket(String expressing) {
+        Stack<Character> stack = new Stack<>();
+        for (char c : expressing.toCharArray()) {
+            if (c == '(' || c == '{' || c == '[') {
+                stack.push(c);
+            } else if (c == ')' || c == '}' || c == ']') {
+                if (stack.isEmpty()) {
+                    return false; // 括号不匹配
+                }
+                char top = stack.pop();
+                // 检查括号是否匹配
+                if ((c == ')' && top != '(') ||
+                        (c == '}' && top != '{') ||
+                        (c == ']' && top != '[')) {
+                    return false; // 括号不匹配
+                }
+            }
+        }
+        return stack.isEmpty(); // 如果栈为空，括号匹配
+    }
 }

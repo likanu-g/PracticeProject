@@ -4,8 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class MyStackTest {
 
@@ -55,5 +54,11 @@ class MyStackTest {
         assertEquals(5, myStack.peek());
         myStack.pop();
         assertEquals(4, myStack.peek());
+    }
+
+    @Test
+    void matchBracket() {
+        assertTrue(myStack.matchBracket("([])"));
+        assertFalse(myStack.matchBracket("([(])"));
     }
 }
