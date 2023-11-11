@@ -39,4 +39,16 @@ class StringQuestionTest {
         assertTrue(stringQuestion.isEven(8));
         assertTrue(stringQuestion.isEven(0));
     }
+
+    @Test
+    void reArrangeInOrder1() {
+        stringQuestion.reArrangeInOrder1(nums);
+        assertArrayEquals(new int[]{7, 3, 5, 2, 8, 10, 6}, nums);
+    }
+
+    @Test
+    void reArrangeInOrder2() {
+        stringQuestion.reArrangeInOrder2(nums);
+        assertArrayEquals(new int[]{7, 3, 5, 2, 8, 10, 6}, nums);
+    }
 }

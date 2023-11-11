@@ -1,5 +1,7 @@
 package org.example.algorithm.string;
 
+import java.util.Arrays;
+
 public class StringQuestion {
 
     /**
@@ -50,5 +52,53 @@ public class StringQuestion {
         int tmp = nums[low];
         nums[low] = nums[high];
         nums[high] = tmp;
+    }
+
+    /**
+     * 按照顺序左右排列奇数和偶数
+     * 时间复杂度( O(n) )
+     * 空间复杂度( O(n) ) 因为使用了临时数组作为缓存
+     *
+     * @param array 待排序数组
+     */
+    public void reArrangeInOrder1(int[] array) {
+        int[] tmpArray = new int[array.length];
+        int j = 0;
+        //先排奇数
+        for (int k : array) {
+            if (!isEven(k)) {
+                tmpArray[j++] = k;
+            }
+        }
+        //再排序偶数
+        for (int k : array) {
+            if (isEven(k)) {
+                tmpArray[j++] = k;
+            }
+        }
+        //合并奇数和偶数
+        System.arraycopy(tmpArray, 0, array, 0, array.length);
+    }
+
+    public void reArrangeInOrder2(int[] array) {
+        System.out.println("array = " + Arrays.toString(array));
+        int i, j, k;
+        int tmp;
+
+        for (i = 0; i < array.length; i++) {
+            if (isEven(array[i])) {
+                break;
+            }
+        }
+        for (j = i + 1; j < array.length; j++) {
+            if (!isEven(array[j])) {
+                tmp = array[j];
+                for (k = j - 1; k >= i; k--) {
+                    array[k + 1] = array[k];
+                }
+                array[i] = tmp;
+                i = i + 1;
+            }
+        }
     }
 }
