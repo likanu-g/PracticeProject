@@ -1,11 +1,11 @@
-package org.example.algorithm.array;
+package org.example.algorithm.arrayandstring;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArrayQuestion {
+public class ArrayAndStringQuestion {
 
     /**
      * 重排数组元素，使其左边是奇数，右边是偶数
@@ -109,7 +109,7 @@ public class ArrayQuestion {
                 for (k = j - 1; k >= i; k--) {
                     array[k + 1] = array[k];
                 }
-                //array[i]是第一个偶数，将它替换成奇数，完成奇数的顺序排列
+                //arrayandstring[i]是第一个偶数，将它替换成奇数，完成奇数的顺序排列
                 array[i] = odd;
                 //继续寻找下一个奇数，因为j是奇数，所以下一个奇数一定在j后面，没必要i = i+1，直接等于j，然后从j后面找就可以了
                 i = j;

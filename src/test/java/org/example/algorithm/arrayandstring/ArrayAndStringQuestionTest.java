@@ -1,4 +1,4 @@
-package org.example.algorithm.array;
+package org.example.algorithm.arrayandstring;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,16 +8,16 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ArrayQuestionTest {
+class ArrayAndStringQuestionTest {
 
     private int[] nums;
 
-    private ArrayQuestion arrayQuestion;
+    private ArrayAndStringQuestion arrayAndStringQuestion;
 
     @BeforeEach
     void setUp() {
         nums = new int[]{7, 2, 3, 5, 8, 10, 6};
-        arrayQuestion = new ArrayQuestion();
+        arrayAndStringQuestion = new ArrayAndStringQuestion();
     }
 
     @AfterEach
@@ -27,36 +27,36 @@ class ArrayQuestionTest {
 
     @Test
     void reArrange() {
-        arrayQuestion.reArrange(nums);
+        arrayAndStringQuestion.reArrange(nums);
         assertArrayEquals(new int[]{7, 5, 3, 2, 8, 10, 6}, nums);
         //System.out.println(Arrays.toString(nums));
     }
 
     @Test
     void isEven() {
-        assertTrue(arrayQuestion.isEven(2));
-        assertTrue(arrayQuestion.isEven(4));
-        assertTrue(arrayQuestion.isEven(6));
-        assertTrue(arrayQuestion.isEven(8));
-        assertTrue(arrayQuestion.isEven(0));
+        assertTrue(arrayAndStringQuestion.isEven(2));
+        assertTrue(arrayAndStringQuestion.isEven(4));
+        assertTrue(arrayAndStringQuestion.isEven(6));
+        assertTrue(arrayAndStringQuestion.isEven(8));
+        assertTrue(arrayAndStringQuestion.isEven(0));
     }
 
     @Test
     void reArrangeInOrder1() {
-        arrayQuestion.reArrangeInOrder1(nums);
+        arrayAndStringQuestion.reArrangeInOrder1(nums);
         assertArrayEquals(new int[]{7, 3, 5, 2, 8, 10, 6}, nums);
     }
 
     @Test
     void reArrangeInOrder2() {
-        arrayQuestion.reArrangeInOrder2(nums);
+        arrayAndStringQuestion.reArrangeInOrder2(nums);
         assertArrayEquals(new int[]{7, 3, 5, 2, 8, 10, 6}, nums);
     }
 
     @Test
     void sumOfTwoNum() {
         nums = new int[]{1, 2, 4, 5, 8, 13, 17, 21, 36};
-        final List<int[]> ints = arrayQuestion.sumOfTwoNum(nums, 21);
+        final List<int[]> ints = arrayAndStringQuestion.sumOfTwoNum(nums, 21);
         //assertIterableEquals(List.of(new int[]{1, 5}), ints);
         assertEquals(3, ints.size());
         assertEquals(2, ints.get(0)[0]);
@@ -71,7 +71,7 @@ class ArrayQuestionTest {
     void intersectionOfTwoOrderArray() {
         nums = new int[]{1, 2, 4, 5, 8, 13, 17, 21, 36};
         int[] nums1 = new int[]{1, 5, 8, 13, 19, 20};
-        List<Integer> list = arrayQuestion.intersectionOfTwoOrderArray(nums, nums1);
+        List<Integer> list = arrayAndStringQuestion.intersectionOfTwoOrderArray(nums, nums1);
         assertIterableEquals(List.of(1, 5, 8, 13), list);
     }
 }
