@@ -1,9 +1,11 @@
-package org.example.algorithm.string;
+package org.example.algorithm.array;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StringQuestion {
+public class ArrayQuestion {
 
     /**
      * 重排数组元素，使其左边是奇数，右边是偶数
@@ -125,7 +127,7 @@ public class StringQuestion {
      * @param target 求和
      * @return 数组索引的列表
      */
-    public List<int[]> sumOfTwoNum(int @org.jetbrains.annotations.NotNull [] array, int target) {
+    public List<int[]> sumOfTwoNum(int @NotNull [] array, int target) {
         List<int[]> list = new ArrayList<>();
         int first = 0;
         int second = array.length - 1;
@@ -143,6 +145,34 @@ public class StringQuestion {
             }
         }
         return list;
+    }
+
+    /**
+     * 求两有序数组的交集
+     *
+     * @param array1 数组1
+     * @param array2 数组2
+     * @return 交集集合
+     */
+    public List<Integer> intersectionOfTwoOrderArray(int @NotNull [] array1, int[] array2) {
+        List<Integer> integerList = new ArrayList<>();
+        int first = 0, second = 0;
+        while (first < array1.length && second < array2.length) {
+            // 由于是有序数组，如果array1[first] > array2[second]说明
+            // array1[first]后面的所有值都大于array2[second]，
+            //因此 array2[second]得向后移动才有可能与array1[first]相等
+            if (array1[first] > array2[second]) {
+                second++;
+                //移动first的原理和和上面移动second的相同
+            } else if (array1[first] < array2[second]) {
+                first++;
+            } else {
+                integerList.add(array1[first]);
+                first++;
+                second++;
+            }
+        }
+        return integerList;
     }
 
 }
