@@ -1,6 +1,7 @@
 package org.example.algorithm.string;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StringQuestion {
 
@@ -115,4 +116,33 @@ public class StringQuestion {
         //简单说：整个算法就是找到第一个偶数，以这个偶数为锚点，找到这个锚点后的第一个奇数，然后向后平移锚点到奇数之间的所有元素1个位置
         //再交换奇数和锚点的位置，以此再循环找到下一个奇数，直到所有奇数找完排序完毕，偶数的顺序已知都没有变化过，所以不需要排序
     }
+
+
+    /**
+     * 有序数组的两数求和
+     *
+     * @param array  数组
+     * @param target 求和
+     * @return 数组索引的列表
+     */
+    public List<int[]> sumOfTwoNum(int @org.jetbrains.annotations.NotNull [] array, int target) {
+        List<int[]> list = new ArrayList<>();
+        int first = 0;
+        int second = array.length - 1;
+        for (int i = 0; i < array.length; i++) {
+            //最大 + 最小都小于目标值，说明最小值太小了，first指针往右移动增加自己(因为是排序的数组，右边数字比左边大)
+            if (array[first] + array[second] < target) {
+                first++;
+                //最大 + 最小都小于目标值，说明最小值太小了，second指针往左移动减小自己(因为是排序的数组，右边数字比左边大)
+            } else if (array[first] + array[second] > target) {
+                second--;
+            } else {
+                list.add(new int[]{first, second});
+                first++;
+                second--;
+            }
+        }
+        return list;
+    }
+
 }
