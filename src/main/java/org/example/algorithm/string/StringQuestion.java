@@ -80,25 +80,39 @@ public class StringQuestion {
         System.arraycopy(tmpArray, 0, array, 0, array.length);
     }
 
+    /**
+     * 按照顺序左右排列奇数和偶数
+     * 时间复杂度 O(n^2)
+     * 空间复杂度O(1) 在原数组上操作数组，没有开辟新的空间
+     *
+     * @param array 待排序数组
+     */
     public void reArrangeInOrder2(int[] array) {
-        System.out.println("array = " + Arrays.toString(array));
         int i, j, k;
-        int tmp;
+        int odd;
 
         for (i = 0; i < array.length; i++) {
+            //找到第一个出现的偶数的索引
             if (isEven(array[i])) {
                 break;
             }
         }
         for (j = i + 1; j < array.length; j++) {
+            //找到第一个偶数后面的第一个奇数
             if (!isEven(array[j])) {
-                tmp = array[j];
+                //找到奇数
+                odd = array[j];
+                //将第一个偶数到奇数之间的所有数向后平移1
                 for (k = j - 1; k >= i; k--) {
                     array[k + 1] = array[k];
                 }
-                array[i] = tmp;
-                i = i + 1;
+                //array[i]是第一个偶数，将它替换成奇数，完成奇数的顺序排列
+                array[i] = odd;
+                //继续寻找下一个奇数，因为j是奇数，所以下一个奇数一定在j后面，没必要i = i+1，直接等于j，然后从j后面找就可以了
+                i = j;
             }
         }
+        //简单说：整个算法就是找到第一个偶数，以这个偶数为锚点，找到这个锚点后的第一个奇数，然后向后平移锚点到奇数之间的所有元素1个位置
+        //再交换奇数和锚点的位置，以此再循环找到下一个奇数，直到所有奇数找完排序完毕，偶数的顺序已知都没有变化过，所以不需要排序
     }
 }
