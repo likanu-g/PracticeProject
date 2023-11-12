@@ -175,4 +175,47 @@ public class ArrayAndStringQuestion {
         return integerList;
     }
 
+
+    /**
+     * 求字符串数组的最长公共前缀
+     *
+     * @param strings 字符串数组
+     * @return 公共字符串串
+     */
+    public String getLongestCommonPrefix(String[] strings) {
+        String commonPrefix;
+        if (strings == null) {
+            throw new ArrayStoreException("数组为空");
+        }
+        if (strings.length == 1) {
+            return strings[0];
+        } else {
+            commonPrefix = getCommonPrefix(strings[0], strings[1]);
+            for (int i = 2; i < strings.length; i++) {
+                commonPrefix = getCommonPrefix(commonPrefix, strings[i]);
+            }
+        }
+        return commonPrefix;
+    }
+
+    /**
+     * 求两个字符串的公共前缀
+     *
+     * @param string1 字符串1
+     * @param string2 字符串2
+     * @return 公共前缀
+     */
+    public String getCommonPrefix(String string1, String string2) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < Math.min(string1.length(), string2.length()); i++) {
+            //因为是查找前缀，所以对应索引位置比较即可
+            if (string1.charAt(i) == string2.charAt(i)) {
+                stringBuilder.append(string1.charAt(i));
+            } else {
+                break;
+            }
+        }
+        return stringBuilder.toString();
+    }
+
 }

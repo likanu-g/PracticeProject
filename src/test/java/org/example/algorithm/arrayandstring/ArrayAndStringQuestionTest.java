@@ -74,4 +74,19 @@ class ArrayAndStringQuestionTest {
         List<Integer> list = arrayAndStringQuestion.intersectionOfTwoOrderArray(nums, nums1);
         assertIterableEquals(List.of(1, 5, 8, 13), list);
     }
+
+    @Test
+    void getLongestCommonPrefix() {
+        String[] strings = new String[]{"abcde", "abcab", "abefc"};
+        String result = arrayAndStringQuestion.getLongestCommonPrefix(strings);
+        assertEquals("ab", result);
+    }
+
+    @Test
+    void getCommonPrefix() {
+        String string1 = "abcde";
+        String string2 = "abefc";
+        String result = arrayAndStringQuestion.getCommonPrefix(string1, string2);
+        assertEquals("ab", result);
+    }
 }
