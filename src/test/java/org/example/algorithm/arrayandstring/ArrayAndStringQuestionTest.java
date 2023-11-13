@@ -89,4 +89,9 @@ class ArrayAndStringQuestionTest {
         String result = arrayAndStringQuestion.getCommonPrefix(string1, string2);
         assertEquals("ab", result);
     }
+
+    @Test
+    void getLongestCommonSubString() {
+        assertEquals("cd", arrayAndStringQuestion.getLongestCommonSubString("abcdefg", "cdaf"));
+    }
 }

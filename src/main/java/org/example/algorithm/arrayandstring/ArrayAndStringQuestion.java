@@ -218,4 +218,35 @@ public class ArrayAndStringQuestion {
         return stringBuilder.toString();
     }
 
+
+    /**
+     * 求两个字符串的公共子串
+     *
+     * @param str1 字符串1
+     * @param str2 字符串2
+     * @return 公共字符串
+     */
+    public String getLongestCommonSubString(String str1, String str2) {
+        String longString, shortString, subString;
+        if (str1.length() >= str2.length()) {
+            longString = str1;
+            shortString = str2;
+        } else {
+            longString = str2;
+            shortString = str1;
+        }
+        int i, j;
+        //外层循环为字符串的长度，逐次减小
+        for (i = shortString.length(); i >= 1; i--) {
+            //内层循环获取字符串的每一个子串
+            for (j = 0; j <= shortString.length() - i; j++) {
+                subString = shortString.substring(j, j + i);
+                if (longString.contains(subString)) {
+                    return subString;
+                }
+            }
+        }
+        return null;
+    }
+
 }
