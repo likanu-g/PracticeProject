@@ -259,10 +259,11 @@ public class ArrayAndStringQuestion {
      */
     public List<Integer> getMinConsecutiveArray(int[] nums, int target) {
         //类似选择排序的思路，从数组的第一个值开始，依次与其后面的所有值求和再同target对比
+        List<Integer> integerList = null;
         int minLength = nums.length - 1;
         int sum = 0;
         int start = 0, end = -1;
-        while (start <= nums.length) {
+        while (start < nums.length) {
             //end指针没有到数组末尾且和小于target
             if (end < nums.length - 1 && sum < target) {
                 end++; //end 移动
@@ -274,12 +275,15 @@ public class ArrayAndStringQuestion {
             }
             if (sum >= target) {
                 if (end - start + 1 < minLength) {
-                    //minLength = end -start + 1;
-                    return List.of(start, end);
+                    minLength = end - start + 1;
+                    integerList = List.of(start, end);
                 }
             }
         }
-        return null;
+        if (minLength == nums.length + 1) {
+            return null;
+        }
+        return integerList;
     }
 
 }
