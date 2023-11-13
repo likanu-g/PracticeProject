@@ -220,7 +220,7 @@ public class ArrayAndStringQuestion {
 
 
     /**
-     * 求两个字符串的公共子串
+     * 求两个字符串的公共子串，最多只有一个公共子串(如果有多个只取其中一个即可)
      *
      * @param str1 字符串1
      * @param str2 字符串2
@@ -243,6 +243,39 @@ public class ArrayAndStringQuestion {
                 subString = shortString.substring(j, j + i);
                 if (longString.contains(subString)) {
                     return subString;
+                }
+            }
+        }
+        //这个问题的关键点在于怎么获取较短字符串的所有子串
+        return null;
+    }
+
+    /**
+     * 求元素和为target的最小连续子数组，使用滑动窗口
+     *
+     * @param nums   数组
+     * @param target 目标值
+     * @return 返回元素的索引数组
+     */
+    public List<Integer> getMinConsecutiveArray(int[] nums, int target) {
+        //类似选择排序的思路，从数组的第一个值开始，依次与其后面的所有值求和再同target对比
+        int minLength = nums.length - 1;
+        int sum = 0;
+        int start = 0, end = -1;
+        while (start <= nums.length) {
+            //end指针没有到数组末尾且和小于target
+            if (end < nums.length - 1 && sum < target) {
+                end++; //end 移动
+                sum += nums[end];
+            } else {
+                //说明原来的最大窗口已经不满足要求，需要滑动原来的窗口，移动start
+                sum -= nums[start]; //因为start要移动，所以要减掉原来的num[start]，重新求和
+                start++;
+            }
+            if (sum >= target) {
+                if (end - start + 1 < minLength) {
+                    //minLength = end -start + 1;
+                    return List.of(start, end);
                 }
             }
         }

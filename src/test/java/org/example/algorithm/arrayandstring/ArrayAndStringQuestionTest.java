@@ -94,4 +94,9 @@ class ArrayAndStringQuestionTest {
     void getLongestCommonSubString() {
         assertEquals("cd", arrayAndStringQuestion.getLongestCommonSubString("abcdefg", "cdaf"));
     }
+
+    @Test
+    void getMinConsecutiveArray() {
+        assertIterableEquals(List.of(4, 5), arrayAndStringQuestion.getMinConsecutiveArray(new int[]{2, 3, 1, 2, 4, 3}, 7));
+    }
 }
