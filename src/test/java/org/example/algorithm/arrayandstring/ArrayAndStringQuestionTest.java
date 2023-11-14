@@ -99,4 +99,9 @@ class ArrayAndStringQuestionTest {
     void getMinConsecutiveArray() {
         assertIterableEquals(List.of(4, 5), arrayAndStringQuestion.getMinConsecutiveArray(new int[]{2, 3, 1, 2, 4, 3}, 7));
     }
+
+    @Test
+    void getLongestNoRepeatLength() {
+        assertEquals(10, arrayAndStringQuestion.getLongestNoRepeatLength("abcdefgfabcdertqa"));
+    }
 }

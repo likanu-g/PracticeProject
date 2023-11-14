@@ -3,7 +3,9 @@ package org.example.algorithm.arrayandstring;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ArrayAndStringQuestion {
 
@@ -284,6 +286,35 @@ public class ArrayAndStringQuestion {
             return null;
         }
         return integerList;
+    }
+
+    /**
+     * 求给定字符串的最长无重复子串的长度
+     *
+     * @param string
+     * @return
+     */
+    public int getLongestNoRepeatLength(String string) {
+        int start = 0;
+        int end = 0;
+        Set<Character> characterSet = new HashSet<>();
+        int maxLength = 0;
+        while (start < string.length()) {
+            //如果end没有指向字符串末尾，且set中不包含end处的字符
+            if (end < string.length() && characterSet.add(string.charAt(end))) {
+                //每次移动完end指针，将最大长度与maxLength比较
+                if (end - start + 1 > maxLength) {
+                    maxLength = end - start + 1;
+                }
+                // 移动end指针
+                end++;
+            } else { //end指针已经到了字符串末尾或者字符已经存在于set中
+                //说明出现了重复的字符在start位置，所以要剔除，移动start重新重复前面的操作
+                characterSet.remove(string.charAt(start));
+                start++;
+            }
+        }
+        return maxLength;
     }
 
 }
