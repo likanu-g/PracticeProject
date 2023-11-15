@@ -2,10 +2,7 @@ package org.example.algorithm.arrayandstring;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ArrayAndStringQuestion {
 
@@ -289,7 +286,7 @@ public class ArrayAndStringQuestion {
     }
 
     /**
-     * 求给定字符串的最长无重复子串的长度
+     * 求给定字符串的最长无重复子串的长度（使用滑动窗口）
      *
      * @param string
      * @return
@@ -315,6 +312,72 @@ public class ArrayAndStringQuestion {
             }
         }
         return maxLength;
+    }
+
+
+    /**
+     * 在给定的字符数组中删除指定的字符数组中的字符，求删除所有指定字符后原字符数组剩余的字符的个数
+     *
+     * @param srcStr    给定的原字符数组
+     * @param removeStr 删除的字符数组（没有重复字符）
+     * @return 原字符数组中剩余字符的个数
+     */
+    public int removeChars(char[] srcStr, char[] removeStr) {
+        int src = 0;
+        int dst = 0;
+        HashSet<Character> set = new HashSet<>();
+        //将要删除的所有字符添加到hashset中
+        for (char ch : removeStr) {
+            set.add(ch);
+        }
+        for (src = 0; src < srcStr.length; src++) {
+            if (set.contains(srcStr[src])) {
+                //这里为什么可以这么直接赋值，是因为dst <= src,所以不会造成srcStr[src]后面的值被覆盖
+                //这里的双指针用法可以延伸到netty的ByteBuf或者java的ByteBuffer
+                //使用双指针作为读写指针
+                srcStr[dst] = srcStr[src];
+                //移动dst，这里的dst既做了字符索引又做了，元素个数的计数器
+                dst++;
+                set.remove(srcStr[src]);
+            }
+        }
+        return dst;
+    }
+
+
+    /**
+     * 求最短的连续子数组，如果这个子数组升序排列，整个数组也是升序排列
+     *
+     * @param array 原数组
+     * @return 子数组的长度
+     */
+    public int getShortestConsecutiveSubArray(int[] array) {
+        int[] tmpArray = Arrays.copyOf(array, array.length);
+        int start = 0;
+        int end = 0;
+        //首先进行数组排序
+        Arrays.sort(tmpArray);
+        //正向找乱序的起点
+        for (int i = 0; i < array.length; i++) {
+            //如果同位置元素不相等，说明是乱序的
+            if (array[i] != tmpArray[i]) {
+                start = i;
+                break;
+            }
+        }
+        //反向找乱序的终点
+        for (int i = array.length - 1; i >= 0; i--) {
+            if (array[i] != tmpArray[i]) {
+                end = i;
+                break;
+            }
+        }
+
+        if (end == start && start == 0) {
+            return 0;
+        } else {
+            return end - start + 1;
+        }
     }
 
 }

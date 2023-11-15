@@ -104,4 +104,15 @@ class ArrayAndStringQuestionTest {
     void getLongestNoRepeatLength() {
         assertEquals(10, arrayAndStringQuestion.getLongestNoRepeatLength("abcdefgfabcdertqa"));
     }
+
+    @Test
+    void removeChars() {
+        assertEquals(2, arrayAndStringQuestion.removeChars("aeabfe".toCharArray(), "ea".toCharArray()));
+    }
+
+    @Test
+    void getShortestConsecutiveSubArray() {
+        assertEquals(4, arrayAndStringQuestion.getShortestConsecutiveSubArray(new int[]{2, 4, 7, 6, 11, 8, 19}));
+    }
+
 }
