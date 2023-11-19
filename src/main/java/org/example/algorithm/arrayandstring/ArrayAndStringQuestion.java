@@ -380,4 +380,80 @@ public class ArrayAndStringQuestion {
         }
     }
 
+
+    /**
+     * 重排字符数组中的字符，重排顺序按照字母、数字、符号的顺序排列
+     *
+     * @param chars 待重排数组
+     */
+    public void charArrayRearrange(char[] chars) {
+        int left = 0;
+        int right = chars.length - 1;
+        while (left < right) {
+            //skip letters
+            while (left < right && Character.isLetter(chars[left])) {
+                left++;
+            }
+            //skip symbols, not letter or digit
+            while (left < right && !Character.isLetterOrDigit(chars[right])) {
+                right--;
+            }
+            if (left < right) {
+                swap(chars, left, right);
+                left++;
+                right--;
+            }
+        }
+        reverse(chars, left, chars.length - 1);
+        System.out.println("chars = " + Arrays.toString(chars));
+
+    }
+
+    private void swap(char[] nums, int low, int high) {
+        char tmp = nums[low];
+        nums[low] = nums[high];
+        nums[high] = tmp;
+    }
+
+    private void reverse(char[] arr, int start, int end) {
+        while (start < end) {
+            swap(arr, start, end);
+            start++;
+            end--;
+        }
+    }
+
+
+    /**
+     * 判断两个字符串是否互为变形词
+     * 例如： "abcd"和"cadb" 是互为变形词
+     *
+     * @param str1 第一个字符串
+     * @param str2 第二个字符串
+     * @return 互为变形词返回true, 否则,返回false
+     */
+    public boolean isDeformation(String str1, String str2) {
+        if (str1 == null || str2 == null || str1.length() != str2.length()) {
+            return false;
+        } else {
+            char[] chars1 = str1.toCharArray();
+            char[] chars2 = str2.toCharArray();
+            int[] map = new int[256];
+            for (char c : chars1) {
+                //遍历str1标记所有字符
+                // map的key表示str1中的字符，
+                // value表示该字符出现的次数
+                map[c]++;
+            }
+            for (int i = 0; i < str2.length(); i++) {
+                //map[chars2[i]]表示chars2[i] 这个字符在map中出现的次数
+                //每遇到一次，次数-1
+                if (map[chars2[i]]-- == 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 }

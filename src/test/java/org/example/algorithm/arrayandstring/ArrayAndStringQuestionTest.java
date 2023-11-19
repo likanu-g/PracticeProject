@@ -115,4 +115,21 @@ class ArrayAndStringQuestionTest {
         assertEquals(4, arrayAndStringQuestion.getShortestConsecutiveSubArray(new int[]{2, 4, 7, 6, 11, 8, 19}));
     }
 
+    @Test
+    void charArrayRearrange() {
+        char[] arr = {'a', '1', 'b', '2', 'c', '$', '3', 'd', '4'};
+        arrayAndStringQuestion.charArrayRearrange(arr);
+        //assertArrayEquals(new char[]{'a', 'b', 'c', 'd', '1', '2', '3', '4', '$'}, arr);
+
+    }
+
+    @Test
+    void isDeformation() {
+        String string1 = "abcd";
+        String string2 = "dbca";
+        assertTrue(arrayAndStringQuestion.isDeformation(string1, string2));
+        String string3 = "dbacac";
+        String string4 = "adbcaa";
+        assertTrue(arrayAndStringQuestion.isDeformation(string3, string4));
+    }
 }
