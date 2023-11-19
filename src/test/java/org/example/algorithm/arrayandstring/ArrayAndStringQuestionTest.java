@@ -132,4 +132,13 @@ class ArrayAndStringQuestionTest {
         String string4 = "adbcaa";
         assertTrue(arrayAndStringQuestion.isDeformation(string3, string4));
     }
+
+    @Test
+    void isUnique() {
+        String string1 = "abcdsasds";
+        String string2 = "xyzabcsd";
+        assertFalse(arrayAndStringQuestion.isUnique(string1.toCharArray()));
+        assertTrue(arrayAndStringQuestion.isUnique(string2.toCharArray()));
+
+    }
 }

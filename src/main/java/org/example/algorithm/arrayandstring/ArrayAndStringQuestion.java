@@ -456,4 +456,24 @@ public class ArrayAndStringQuestion {
         return true;
     }
 
+    /**
+     * 判断字符数组中所有字符是否只出现过一次
+     *
+     * @param chas 字符数组
+     * @return 是返回true 否返回false
+     */
+    public boolean isUnique(char[] chas) {
+        if (chas == null) {
+            return false;
+        }
+        boolean[] map = new boolean[256];
+        for (char cha : chas) {
+            if (map[cha]) {
+                return false;
+            }
+            map[cha] = true;
+        }
+        return true;
+    }
+
 }
