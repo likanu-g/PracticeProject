@@ -476,4 +476,30 @@ public class ArrayAndStringQuestion {
         return true;
     }
 
+    /**
+     * 在 source字符串中查找 target字符串第一次出现的索引，如果target 不在 source中返回-1
+     *
+     * @param source 原字符串
+     * @param target 目标字符串
+     * @return 字符串出现的第一次出现的索引
+     */
+    public int strStr(String source, String target) {
+        if (source == null || target == null) {
+            return -1;
+        }
+        int i, j;
+        for (i = 0; i < source.length() - target.length() + 1; i++) {
+            for (j = 0; j < target.length(); j++) {
+                if (source.charAt(i + j) != target.charAt(j)) {
+                    break;
+                }
+            }
+            if (j == target.length()) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
 }

@@ -130,7 +130,7 @@ class ArrayAndStringQuestionTest {
         assertTrue(arrayAndStringQuestion.isDeformation(string1, string2));
         String string3 = "dbacac";
         String string4 = "adbcaa";
-        assertTrue(arrayAndStringQuestion.isDeformation(string3, string4));
+        assertFalse(arrayAndStringQuestion.isDeformation(string3, string4));
     }
 
     @Test
@@ -140,5 +140,12 @@ class ArrayAndStringQuestionTest {
         assertFalse(arrayAndStringQuestion.isUnique(string1.toCharArray()));
         assertTrue(arrayAndStringQuestion.isUnique(string2.toCharArray()));
 
+    }
+
+    @Test
+    void strStr() {
+        String string1 = "sa1212dsd";
+        String s = "2ds";
+        assertEquals(5, arrayAndStringQuestion.strStr(string1, s));
     }
 }
