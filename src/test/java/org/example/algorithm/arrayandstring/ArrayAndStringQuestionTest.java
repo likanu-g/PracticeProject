@@ -148,4 +148,11 @@ class ArrayAndStringQuestionTest {
         String s = "2ds";
         assertEquals(5, arrayAndStringQuestion.strStr(string1, s));
     }
+
+    @Test
+    void searchFirstAndLastRange() {
+        int[] nums = {5, 7, 7, 8, 8, 10};
+        int target = 8;
+        assertArrayEquals(new int[]{3, 4}, arrayAndStringQuestion.searchFirstAndLastRange(nums, target));
+    }
 }

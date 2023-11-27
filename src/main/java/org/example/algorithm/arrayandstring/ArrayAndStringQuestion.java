@@ -501,5 +501,36 @@ public class ArrayAndStringQuestion {
         return -1;
     }
 
+    /**
+     * 在排序数组中找到 给定目标值target的第一个和最后一个位置
+     *
+     * @param nums   排序数组
+     * @param target 目标数字
+     * @return 位置的数组
+     */
+    public int[] searchFirstAndLastRange(int[] nums, int target) {
+        int l = bisect(nums, target);
+        int r = bisect(nums, target + 1);
+        if (l == r) {
+            return new int[]{-1, -1};
+        } else {
+            return new int[]{l, r - 1};
+        }
+    }
+
+    private int bisect(int[] nums, int n) {
+        int left = 0;
+        int right = nums.length;
+        while (left < right) {
+            int mid = (left + right) >>> 1;
+            if (nums[mid] >= n) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return left;
+    }
+
 
 }
